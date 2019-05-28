@@ -1,6 +1,7 @@
 package jp.co.sample.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -29,7 +30,7 @@ public class AdministratorRepository {
 		Administrator administrator = new Administrator();
 		administrator.setId(rs.getInt("id"));
 		administrator.setName(rs.getString("name"));
-		administrator.setMailAddress(rs.getString("mailAddress"));
+		administrator.setMailAddress(rs.getString("mail_address"));
 		administrator.setPassword(rs.getString("password"));
 		return administrator;
 	};
@@ -42,7 +43,7 @@ public class AdministratorRepository {
 	public void insert(Administrator administrator) {
 		SqlParameterSource param = new BeanPropertySqlParameterSource(administrator);
 
-		String insertSql = "INSERT INTO administrator(id,name,mailAddress,password) VALUES(:id,:name,:mailAddress,:password);";
+		String insertSql = "INSERT INTO administrators(id,name,mail_address,password) VALUES(:id,:name,:mailAddress,:password);";
 		template.update(insertSql, param);
 	}
 
@@ -54,11 +55,17 @@ public class AdministratorRepository {
 	 * @return 取得した管理者情報 (存在しない場合はnullを返す)
 	 */
 	public Administrator findByMailAddressAndPassword(String mailAddress, String password) {
-		String sql = "SELECT id,name,mailAddress,password FROM administrator WHERE mailAddress=:mailAddress AND password=:password; ";
+		String sql = "SELECT id,name,mail_address,password FROM administrators WHERE mail_address=:mailAddress AND password=:password; ";
 
-		SqlParameterSource param = new MapSqlParameterSource().addValue("mailAddress", mailAddress);
+		SqlParameterSource param = new MapSqlParameterSource().addValue("mailAddress", mailAddress).addValue("password",
+				password);
 
-		Administrator administrator = template.queryForObject(sql, param, ADMINISTRATOR_ROW_MAPPER);
+		Administrator administrator;
+		try {
+			administrator = template.queryForObject(sql, param, ADMINISTRATOR_ROW_MAPPER);
+		} catch (DataAccessException e) {
+			return null;
+		}
 
 		return administrator;
 

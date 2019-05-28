@@ -3,6 +3,7 @@ package jp.co.sample.domain;
 /**
  * 
  * 管理者情報を表すドメイン
+ * 
  * @author risa.nazato
  *
  */
@@ -18,7 +19,8 @@ public class Administrator {
 
 	@Override
 	public String toString() {
-		return "Administrator [id=" + id + ", name=" + name + ", mailAddress=" + mailAddress + ", password=" + password + "]";
+		return "Administrator [id=" + id + ", name=" + name + ", mailAddress=" + mailAddress + ", password=" + password
+				+ "]";
 	}
 
 	public Administrator() {
