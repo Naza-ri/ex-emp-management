@@ -20,8 +20,9 @@ public class EmployeeController {
 	private EmployeeService employService;
 
 	/**
+	 * 従業員一覧を表示.
 	 * 
-	 * @param model
+	 * @param model モデル
 	 * @return 従業員一覧画面に遷移.
 	 */
 	@RequestMapping("/showList")

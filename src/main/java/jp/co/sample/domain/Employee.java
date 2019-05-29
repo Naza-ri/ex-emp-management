@@ -34,9 +34,14 @@ public class Employee {
 	/** 扶養人数 */
 	private Integer dependentsCount;
 
+	
+
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", mailAddress=" + mailAddress + ",zipCode=" + zipCode +",address=" +address + ",telephone=" + telephone +",salary=" + salary +",characteristics=" +characteristics+",dependentsCount=" + dependentsCount +"]" ;
+		return "Employee [id=" + id + ", name=" + name + ", image=" + image + ", gender=" + gender + ", hireDate="
+				+ hireDate + ", mailAddress=" + mailAddress + ", zipCode=" + zipCode + ", address=" + address
+				+ ", telephone=" + telephone + ", salary=" + salary + ", characteristics=" + characteristics
+				+ ", dependentsCount=" + dependentsCount + "]";
 	}
 
 	public Employee() {

@@ -10,7 +10,7 @@ import jp.co.sample.domain.Employee;
 import jp.co.sample.repository.EmployeeRepository;
 
 /**
- * 従業員情報を全権取得.
+ * 従業員関連機能の業務処理を行うサービス.
  * 
  * @author risa.nazato
  *
@@ -21,10 +21,17 @@ public class EmployeeService {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
+	/**
+	 * 従業員情報を全権取得する.
+	 * 
+	 * @return 従業員情報
+	 */
 	public List<Employee> showList() {
 
 		List<Employee> employee = employeeRepository.findAll();
 		return employee;
 
 	}
+	
+	
 }
