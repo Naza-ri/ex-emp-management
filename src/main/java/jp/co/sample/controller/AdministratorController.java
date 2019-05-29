@@ -88,10 +88,21 @@ public class AdministratorController {
 		if (adminObject == null) {
 			model.addAttribute("message", "メールアドレスまたはパスワードが不正です");
 			return "administrator/login.html";
-		} 
-//		Administrator administrator = new Administrator();
+		}
 		session.setAttribute("administratorName", adminObject.getName());
 		return "forward:/employee/showList";
+	}
+
+	/**
+	 * 
+	 * ログアウト処理.
+	 * 
+	 * @return ログイン画面にリダイレクト
+	 */
+	@RequestMapping("/logout")
+	public String logout() {
+		session.invalidate();
+		return "redirect:/";
 	}
 
 }
